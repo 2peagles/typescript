@@ -1,10 +1,11 @@
-import React from 'react'
+import { Name } from './Person.types';
 
 type PeronsListProps = {
-    names: {
-        first:string
-        last:string   
-     }[]
+    // names: {
+    //     first:string
+    //     last:string   
+    //  }[]
+    names:Name[ ]
 }
 const PeronsList = (props:PeronsListProps) => {
   return (

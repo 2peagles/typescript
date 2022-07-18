@@ -1,5 +1,3 @@
-import React from 'react'
-
 type GreetProps = {
     name: string
     messageCount:number
@@ -11,7 +9,7 @@ export const Greet = (props:GreetProps) => {
     <div>
         <h1>
              {props.isLoggedIn  ?
-                'Welcome {props.name} You have {props.messageCount} unread messages.' 
+             'Welcome {props.name} You have {props.messageCount} unread messages.' 
             :  'Welcome Guest' }
          </h1>
     </div>

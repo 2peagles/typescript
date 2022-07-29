@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Harry Potter",
+        "price": 20.99,
+        "imgUrl": "/imgs/harry.jpg"
+    },
+    {
+        "id": 2,
+        "name": "The boy in the stripe pjs",
+        "price": 10,
+        "imgUrl": "/imgs/hitler.jpg"
+    },
+    {
+        "id": 3,
+        "name": "After",
+        "price": 20,
+        "imgUrl": "/imgs/after.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Collection of books",
+        "price": 14.50,
+        "imgUrl": "/imgs/books.jpg"
+    }
+]

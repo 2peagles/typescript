@@ -106,7 +106,7 @@ export const About = () => {
           </Row>
           </Row>
         </Container>
-
+{/* 
       <Container style={{height:'100vh'}} >
         <Row> <Col  className='d-flex align-items-center justify-content-center' style={{fontSize:'40px'}}> Title Here </Col></Row>
         <Row>
@@ -125,7 +125,7 @@ export const About = () => {
              </div>
           </Col>
          </Row>
-      </Container>
+      </Container> */}
       <Row style={{height:'50vh', width:'100%'}} >
         <Col className='d-flex align-items-center justify-content-center text-align-center'>
           <div  style={{height:'50vh', width:'40vw'}} className='d-flex align-items-center justify-content-center text-align-center'>

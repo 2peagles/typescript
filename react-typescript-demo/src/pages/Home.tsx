@@ -9,16 +9,16 @@ export const Home = ({products}) => {
         <Col 
           className='d-flex align-items-center justify-content-center'
           >
-          <div>
-              <p> Single, Couples, Small, Medium, Large & Families</p>
+          <div >
+          <p>Couples, Small, Medium, Large & Families</p>
               <h1> Home Essentials</h1>
             <Button style={{ backgroundColor:'#DE8769', borderColor:'#DE8769', marginRight:'10px'}}>Shop Bundles </Button>
             <Button style={{ backgroundColor: 'transparent', borderColor: '#DE8769', color:'black'}}>Shop Individuals</Button>
             </div>
              </Col>
         <Col className='d-flex align-items-center justify-content-center'>
-             <Card>
-            {/* <Card.Img src='/imgs/toliet.png' alt='basket of toliet paper' style={{ objectFit: 'cover' }} /> */}
+             <Card style={{background:'transparent', border:'transparent'}}>
+                <Card.Img src='/imgs/toliet.png' alt='basket of toliet paper'  style={{ objectFit:'cover' }} />
              </Card>
              </Col>
       </Row>
@@ -37,16 +37,14 @@ export const Home = ({products}) => {
           </Row>
         </Container>
       </Row>
-      <Row style={{minHeight:'90vh', margin:'10px 0px'}} >
-        <Row>
-          <Col 
-            className='d-flex align-items-center justify-content-center h-100 w-100'
-            style={{backgroundColor:'rgba(105, 192, 222,0.5)', borderRadius:'2rem', height:'70vh'}}>
-              <div>
-                something here
-                </div>
-            </Col>
-        </Row>
+      <Row style={{minHeight:'50vh', width:'100%',margin:'50px 0px'}} className='d-flex align-items-center justify-content-center' >
+      <Col  className='d-flex align-items-center justify-content-center'> 
+        <div  style={{fontSize:'2.5rem', width:'70vw' }} >
+        Mission Statement Here...
+        Lorem ipsum dolor sit amet. Aut sapiente eius et ullam dolorem quo minima excepturi et quos consectetur. 
+        At numquam eligendi et quidem saepe in numquam enim ut obcaecati omnis. Id nisi ipsa est laborum animi ea iste incidunt 33 nulla unde.
+          </div>
+          </Col>
       </Row>
       <Row style={{minHeight:'90vh'}}   className='d-flex align-items-center justify-content-center ' >
         <Row>
@@ -66,6 +64,24 @@ export const Home = ({products}) => {
           </Col>
         </Row>
       </Row>
+      <Row className='d-flex align-items-center justify-content-center text-align-center' style={{minHeight:'80vh'}}>
+        <Col className='d-flex align-items-center justify-content-center h-100'> 
+        <div  style={{fontSize:'20px', maxWidth:'500px' }} >
+        Mission Statement Here...
+        Lorem ipsum dolor sit amet. Aut sapiente eius et ullam dolorem quo minima excepturi et quos consectetur. 
+        At numquam eligendi et quidem saepe in numquam enim ut obcaecati omnis. Id nisi ipsa est laborum animi ea iste incidunt 33 nulla unde.
+        Lorem ipsum dolor sit amet. Aut sapiente eius et ullam dolorem quo minima excepturi et quos consectetur. 
+        At numquam eligendi et quidem saepe in numquam enim ut obcaecati omnis. Id nisi ipsa est laborum animi ea iste incidunt 33 nulla unde.
+        Lorem ipsum dolor sit amet. Aut sapiente eius et ullam dolorem quo minima excepturi et quos consectetur. 
+        At numquam eligendi et quidem saepe in numquam enim ut obcaecati omnis. Id nisi ipsa est laborum animi ea iste incidunt 33 nulla unde.
+          </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-center h-100'>
+                <div style={{fontSize:'20px', maxWidth:'500px' }}>
+                  something here
+                </div>
+          </Col>
+        </Row>
     </Container>
   )
 }

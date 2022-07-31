@@ -15,6 +15,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  color:rgb(158, 255, 236);
 }
 
 
@@ -26,3 +27,4 @@
     transform: rotate(360deg);
   }
 }
+/* style={{fontFamily:'Patrick Hand', background:'linear-gradient(#e66465, #9198e5)'}} */

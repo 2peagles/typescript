@@ -22,7 +22,7 @@ const StoreItem = ({product}) => {
     const quantity = getItemQuantity(product.id)
 
     return(
-    <Card className='h-100'>
+        <Card className='h-100'>
         <Card.Img 
         variant='top' 
         src={product.image?.url} alt={product.name} 

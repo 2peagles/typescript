@@ -8,6 +8,7 @@ import { Navbar } from './components/Navbar';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import './App.css';
 import commerce from './lib/commerce';
+import WebFont from 'webfontloader';
 
 function App() {
   const [products, setProducts] = useState<any[]>([]);
@@ -22,12 +23,20 @@ function App() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Patrick Hand', 'Chilanka']
+      }
+    });
+   }, []);
+
   return (
     <ShoppingCartProvider>
     <Navbar />
     <Container  className="mb-4">
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home products={products}/>} />
         <Route path='/store' element={<Store products={products}/>} />
         <Route path='/about' element={<About />} />
       </Routes>

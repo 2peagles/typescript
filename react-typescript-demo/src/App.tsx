@@ -34,7 +34,7 @@ function App() {
   return (
     <ShoppingCartProvider>
     <Navbar />
-    <Container  className="mb-4">
+    <Container fluid className='no-gutters'>
       <Routes>
         <Route path='/' element={<Home products={products}/>} />
         <Route path='/store' element={<Store products={products}/>} />

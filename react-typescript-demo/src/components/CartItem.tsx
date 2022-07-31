@@ -1,13 +1,12 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
-// import storeItems from '../data/items.json';
 import { Button, Stack } from 'react-bootstrap';
 import { formatCurrency } from '../utilities/formatCurrency';
-import { Store }  from '../pages/Store';
+import Store from '../pages/Store';
 
-type CartItemProps={
+type CartItemProps = {
     id:number 
     quantity:number
-}
+}  
 export function CartItem({id, quantity}: CartItemProps){
         const {removeFromCart } = useShoppingCart()
         const product = Store.find(i => i.id === id)
@@ -25,6 +24,5 @@ export function CartItem({id, quantity}: CartItemProps){
             <div>{formatCurrency(product.price * quantity)}</div>
             <Button onClick={()=> removeFromCart(product.id)} variant='outlined'> x </Button>
         </Stack>
-
     )
 }

@@ -1,15 +1,9 @@
 import React from 'react';
-// import storeItems from '../data/items.json';
 import { Row , Col} from 'react-bootstrap';
 import  StoreItem  from '../components/StoreItem';
-// import Commerce from '@chec/commerce.js';
 import PropTypes from 'prop-types';
 
-
-export const Store = ({ products})=>{
-  // const commerce = new Commerce('{your_public_key}');
-
-  // commerce.products.list().then((product) => console.log(product));
+const Store = ({ products })=>{
   return (
     <>
     <h1> Store </h1>
@@ -22,16 +16,13 @@ export const Store = ({ products})=>{
           />
           </Col>
         ))}
-      {/* {StoreItem.map(items => (
-        <Col key={item.id}>
-          <StoreItem{...item} />
-        </Col>
-      ))} */}
     </Row>
     </>
-  )
-}
+  );
+};
 
 Store.propTypes = {
-  products: PropTypes.array,
+  products: PropTypes.array
 };
+
+export default Store;

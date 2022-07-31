@@ -13,7 +13,8 @@ export const Home = ({products}) => {
           <p>Couples, Small, Medium, Large & Families</p>
               <h1> Home Essentials</h1>
             <Button style={{ backgroundColor:'#DE8769', borderColor:'#DE8769', marginRight:'10px'}}>Shop Bundles </Button>
-            <Button style={{ backgroundColor: 'transparent', borderColor: '#DE8769', color:'black'}}>Shop Individuals</Button>
+            <Button style={{ backgroundColor: 'transparent', borderColor: '#DE8769', color:'black',
+}}>Shop Individuals</Button>
             </div>
              </Col>
         <Col xs={12} md={6} className='d-flex align-items-center justify-content-center'>

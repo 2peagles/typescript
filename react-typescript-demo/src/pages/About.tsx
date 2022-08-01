@@ -10,7 +10,7 @@ export const About = () => {
   return (
     <Container fluid className='d-block' style={{fontFamily:'Patrick Hand'}}>
       <Container style={{minHeight:'90vh'}}>
-      <Row>
+      <Row >
         <Col className='d-flex align-items-center justify-content-center'  style={{fontSize:'40px'}}> About Us </Col>
       </Row>
       <Row className='d-flex align-items-center justify-content-center h-100'>
@@ -31,10 +31,10 @@ export const About = () => {
       </Container>
 
         <Container style={{minHeight:'60vh'}} className='d-block '>
-          <Row className='d-flex align-items-center justify-content-center h-100'>
-          <Row className='d-flex align-items-center justify-content-center'>
+        <Row className='d-flex align-items-center justify-content-center h-100' md={8} >
+          <Row className='d-flex align-items-center justify-content-center' >
             <IconContext.Provider  value={{ color: "white", className: "about-icons", size:'50px' }} >
-              <Col  style={{backgroundColor:'rgba(105, 192, 222,0.5)', margin:'20px', borderRadius:'1rem', minHeight:'20vh'}}>
+              <Col  style={{backgroundColor:'rgba(105, 192, 222,0.5)', margin:'20px', borderRadius:'1rem', minHeight:'20vh'}} >
                  <GiEarthAmerica/>
                  <div className='d-flex align-items-center justify-content-center'>
                    <p >Lorem ipsum dolor sit amet. Est illo molestiae sed neque 

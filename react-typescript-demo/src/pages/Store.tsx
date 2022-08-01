@@ -3,7 +3,7 @@ import { Row , Col} from 'react-bootstrap';
 import  StoreItem  from '../components/StoreItem';
 import PropTypes from 'prop-types';
 
-const Store = ({ products })=>{
+const Store = ({ products, onAddToCart })=>{
   return (
     <>
     <h1> Store </h1>
@@ -11,8 +11,9 @@ const Store = ({ products })=>{
         {products.map((product) => (
           <Col>
             <StoreItem
-            key={product.id}
-            product={product}
+              key={product.id}
+              product={product}
+              onAddToCart={onAddToCart}
           />
           </Col>
         ))}

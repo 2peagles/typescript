@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Card, Container, Col, Row} from 'react-bootstrap';
 import  StoreItem  from '../components/StoreItem';
 
-export const Home = ({products}) => {
+export const Home = ({products, onAddToCart}) => {
   return (
     <Container fluid className='d-block' style={{ padding: '0px', fontFamily: 'Patrick Hand' , marginBottom:'10px'}}>
       <Row style={{ minHeight: '100vh', width: '100vw', backgroundColor: 'rgba(105, 192, 222,0.5)' }}>
@@ -32,6 +32,7 @@ export const Home = ({products}) => {
             <StoreItem
             key={product.id}
             product={product}
+            onAddToCart={onAddToCart}
           />
           </Col>
         ))}     

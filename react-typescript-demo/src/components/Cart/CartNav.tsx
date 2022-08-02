@@ -2,24 +2,25 @@ import React, {useState } from 'react';
 import Cart from './Cart';
 import { BsBag } from 'react-icons/bs';
 import { FaTimes } from 'react-icons/fa';
+import { CartNavCloseButton, CartNavContainer, CartNavOpenButton } from '../../styles/cart';
 const CartNav = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQty}) => {
     const [isCartVisible, setCartVisible] = useState(false);
     const renderOpenButton = () => (
-        <button className="nav__cart-btn--open">
+        <CartNavOpenButton>
             <BsBag />
             {cart !== null ? <span>{cart.total_items}</span> : ''}
-        </button>
+        </CartNavOpenButton>
     );
 
     const renderCloseButton = () => (
-        <button className="nav__cart-btn--close">
-            <FaTimes size="1x" color="white" />
-        </button>
+        <CartNavCloseButton>
+            <FaTimes />
+        </CartNavCloseButton>
     );
 
     return (
-        <div className="nav">
-            <div className="nav__cart" onClick={() => setCartVisible(!isCartVisible)}>
+        <CartNavContainer>
+            <div onClick={() => setCartVisible(!isCartVisible)}>
                 {!isCartVisible ? renderOpenButton() : renderCloseButton()}
             </div>
             {isCartVisible &&
@@ -30,7 +31,7 @@ const CartNav = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQty}) => {
                     onEmptyCart={onEmptyCart}
                 />
             }
-        </div>
+        </CartNavContainer>
     );
 };
 

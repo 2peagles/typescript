@@ -1,5 +1,4 @@
 
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -16,8 +15,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
   color:rgb(158, 255, 236);
+  color:#DE8769;
 }
-
 
 @keyframes App-logo-spin {
   from {
@@ -28,3 +27,4 @@
   }
 }
 /* style={{fontFamily:'Patrick Hand', background:'linear-gradient(#e66465, #9198e5)'}} */
+@import "~bootstrap/scss/bootstrap";

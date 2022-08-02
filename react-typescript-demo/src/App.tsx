@@ -5,11 +5,9 @@ import { Home } from './pages/Home';
 import Store  from './pages/Store';
 import { About } from './pages/About';
 import { Navbar } from './components/Navbar';
-import './App.css';
 import commerce from './lib/commerce';
 import WebFont from 'webfontloader';
 import CartNav from './components/Cart/CartNav';
-
 function App() {
   const [products, setProducts] = useState< any | []>([ ]);
   const [cart, setCart] = useState({});

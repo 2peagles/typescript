@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button, Card, Container, Col, Row} from 'react-bootstrap';
-import  StoreItem  from '../components/StoreItem';
+import { Button, Card, Container, Col, Row} from 'react-bootstrap';
+import StoreItem from '../components/StoreItem';
 
 export const Home = ({products, onAddToCart}) => {
   return (
@@ -14,7 +14,7 @@ export const Home = ({products, onAddToCart}) => {
               <h1> Home Essentials</h1>
             <Button style={{ backgroundColor:'#DE8769', borderColor:'#DE8769', marginRight:'10px'}}>Shop Bundles </Button>
             <Button style={{ backgroundColor: 'transparent', borderColor: '#DE8769', color:'black',
-}}>Shop Individuals</Button>
+            }}>Shop Individuals</Button>
             </div>
              </Col>
         <Col xs={12} md={6} className='d-flex align-items-center justify-content-center'>

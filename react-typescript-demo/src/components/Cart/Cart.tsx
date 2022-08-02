@@ -1,6 +1,7 @@
 import React from "react";
 import CartItem from './CartItem';
 import PropTypes from "prop-types";
+import { CartContainer, CartHeading, CartFooter, CartEmpty, CartCheckout, CartTotal, CartTotalTitle, CartNone } from '../../styles/cart';
 
 const Cart = ({ cart, onEmptyCart, onRemoveFromCart, onUpdateCartQty})=> {
 
@@ -14,9 +15,9 @@ const Cart = ({ cart, onEmptyCart, onRemoveFromCart, onUpdateCartQty})=> {
         }
 
         return (
-            <p className="cart__none">
+            <CartNone>
                 You have no items in your shopping cart, start adding some!
-            </p>
+            </CartNone>
         );
     }
 
@@ -32,23 +33,23 @@ const Cart = ({ cart, onEmptyCart, onRemoveFromCart, onUpdateCartQty})=> {
         ))
     );
     const renderTotal = () => (
-        <div className="cart__total">
-            <p className="cart__total-title">Subtotal:</p>
+        <CartTotal>
+            <CartTotalTitle>Subtotal:</CartTotalTitle>
             <p className="cart__total-price">{cart.subtotal.formatted_with_symbol}</p>
-        </div>
+        </CartTotal>
     );
 
     return (
-        <div className="cart">
-            <h4 className="cart__heading">Your Shopping Cart</h4>
+        <CartContainer>
+            <CartHeading>Your Shopping Cart</CartHeading>
             {renderEmptyMessage()}
             {renderItems()}
             {renderTotal()}
-            <div className="cart__footer">
-                <button className="cart__btn-empty" onClick={handleEmptyCart}>Empty cart</button>
-                <button className="cart__btn-checkout">Checkout</button>
-            </div>
-        </div>
+            <CartFooter>
+                <CartEmpty onClick={handleEmptyCart}>Empty cart</CartEmpty>
+                <CartCheckout>Checkout</CartCheckout>
+            </CartFooter>
+        </CartContainer>
     );
 };
 

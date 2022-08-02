@@ -5,19 +5,21 @@ import  { TbHeartHandshake, TbToiletPaper} from 'react-icons/tb';
 import { RiEarthquakeFill } from 'react-icons/ri';
 import { IconContext } from "react-icons";
 // import { MdOutlineNaturePeople } from 'react-icons/md'
+import { CenterRow, CenterCol} from '../styles/About'
 
 export const About = () => {
   return (
     <Container fluid className='d-block' style={{fontFamily:'Patrick Hand'}}>
       <Container style={{minHeight:'90vh'}}>
       <Row >
-        <Col className='d-flex align-items-center justify-content-center'  style={{fontSize:'40px'}}> About Us </Col>
+        <CenterCol style={{fontSize:'40px'}}> About Us </CenterCol>
       </Row>
-      <Row className='d-flex align-items-center justify-content-center h-100'>
-        <Col  className='d-flex align-items-center justify-content-center h-100'>
+      <CenterRow className=' h-100'>
+        <CenterCol  className='h-100'>
         <IconContext.Provider  value={{size:'30rem', color:'rgba(105, 192, 222,0.5)'}} >
             <GiFloatingPlatforms />
-          </IconContext.Provider></Col>
+          </IconContext.Provider>
+          </CenterCol>
         <Col style={{fontSize:'20px'}}> 
         Mission Statement Here...
         Lorem ipsum dolor sit amet. Aut sapiente eius et ullam dolorem quo minima excepturi et quos consectetur. 
@@ -27,7 +29,7 @@ export const About = () => {
         Lorem ipsum dolor sit amet. Aut sapiente eius et ullam dolorem quo minima excepturi et quos consectetur. 
         At numquam eligendi et quidem saepe in numquam enim ut obcaecati omnis. Id nisi ipsa est laborum animi ea iste incidunt 33 nulla unde.
           </Col>
-        </Row>
+        </CenterRow>
       </Container>
 
         <Container style={{minHeight:'60vh'}} className='d-block '>

@@ -112,7 +112,7 @@ export const CartItemRemove=styled.button`
 `
 export const CartNavContainer=styled.div`
     position: absolute;
-    top: 1rem;
+    top: .5rem;
     right: 1.25rem;
     // z-index: 999;
 `

@@ -3,6 +3,7 @@ import Cart from './Cart';
 import { BsBag } from 'react-icons/bs';
 import { FaTimes } from 'react-icons/fa';
 import { CartNavCloseButton, CartNavContainer, CartNavOpenButton } from '../../styles/cart';
+
 const CartNav = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQty}) => {
     const [isCartVisible, setCartVisible] = useState(false);
     const renderOpenButton = () => (

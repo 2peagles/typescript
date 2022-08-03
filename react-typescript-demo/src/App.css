@@ -16,6 +16,7 @@
   color: white;
   color:rgb(158, 255, 236);
   color:#DE8769;
+  position: absolute;
 }
 
 @keyframes App-logo-spin {

@@ -6,7 +6,7 @@ export const CheckoutConfirmation = () => {
   return (
     <CheckoutContainer className='d-block fixed' style={{backgroundColor:'#DE8769'}}>
     <CheckoutHeader>
-        Checkout Confirmation
+         Confirmation
     </CheckoutHeader>
     <CheckoutBox>
       <CheckoutBoxMessage >

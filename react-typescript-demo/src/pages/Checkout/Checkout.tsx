@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import { Row, Col} from 'react-bootstrap';
 import CartItem from '../../components/Cart/CartItem';
 import CheckoutForm from './CheckoutForm';
 import { CartTotal, CartTotalTitle } from '../../styles/cart';
@@ -25,15 +26,21 @@ const renderTotal = () => (
   </CartTotal>
 );
   return (
-    <CheckoutContainer className='d-block fixed pl-3 pr-3'>
+    <CheckoutContainer className='d-block  pl-3 pr-3'>
         <CheckoutHeader style={{color:'#69c0de80'}}>Checkout</CheckoutHeader>
           <CheckoutBox>
           <CheckoutPageBox>
+            <Row>
+              <Col sm={12} md={6}>
             <CheckoutForm /> 
-            <CheckoutItems>
+            </Col>
+            <Col sm={12} md={6}>
+            <CheckoutItems className='mt-5'>
                   {renderItems()}
                  {renderTotal()}
             </CheckoutItems>
+            </Col>
+            </Row>
             </CheckoutPageBox>
           </CheckoutBox>
     </CheckoutContainer>

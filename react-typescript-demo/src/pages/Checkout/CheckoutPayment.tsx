@@ -8,7 +8,7 @@ export const CheckoutPayment = () => {
   return (
     <CheckoutContainer className='d-block fixed'>
       <CheckoutHeader style={{color:'#69c0de80'}}>
-          Checkout Payment
+         Payment
       </CheckoutHeader>
       <CheckoutBox>
         <CheckoutBoxMessage >

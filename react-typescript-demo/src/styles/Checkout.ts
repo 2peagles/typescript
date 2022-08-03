@@ -33,8 +33,8 @@ export const CheckoutBox = styled.div`
     justify-content:center;
 `
 export const CheckoutBoxMessage = styled.div`
-min-height:50vh;
-min-width:50vw;
+min-height:55vh;
+min-width:55vw;
 display:flex;
 align-items:center;
 justify-content:center;

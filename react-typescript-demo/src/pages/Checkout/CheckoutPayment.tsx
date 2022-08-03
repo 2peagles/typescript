@@ -6,13 +6,13 @@ import { CheckoutContainer, CheckoutHeader, CheckoutBox, CheckoutBoxMessage} fro
 
 export const CheckoutPayment = () => {
   return (
-    <CheckoutContainer className='d-block fixed'>
+    <CheckoutContainer className='d-block'>
       <CheckoutHeader style={{color:'#69c0de80'}}>
          Payment
       </CheckoutHeader>
       <CheckoutBox>
-        <CheckoutBoxMessage >
-          <Form style={{height:'40vh', width:'30vw', color:'black'}}>
+        <CheckoutBoxMessage>
+          <Form style={{ color:'black'}}>
             <Form.Group className="mb-3" >
         <Form.Label>Credit Card Number</Form.Label>
         <Form.Control type="card number" placeholder="Credit Card Number" />

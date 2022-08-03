@@ -22,7 +22,7 @@ export const CheckoutHeader = styled.h1`
     align-items:center;
     justify-content:center;
     font-size:3rem;
-    padding-top:5rem;
+    padding-top:2rem;
     text-transform:uppercase;
 `
 export const CheckoutBox = styled.div`

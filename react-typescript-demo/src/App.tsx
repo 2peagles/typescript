@@ -10,7 +10,7 @@ import WebFont from 'webfontloader';
 import CartNav from './components/Cart/CartNav';
 import Checkout from './pages/Checkout/Checkout';
 import { CheckoutConfirmation } from './pages/Checkout/CheckoutConfirmation';
-import { CheckoutPayment } from './pages/Checkout/CheckoutPayment';
+import { PurchaseSummary } from './pages/Checkout/PurchaseSummary';
 
 function App() {
   const [products, setProducts] = useState< any | []>([ ]);
@@ -87,9 +87,9 @@ function App() {
                 onEmptyCart={handleEmptyCart} 
                   />
                 }/>
-                <Route path='/checkout' element={<Checkout cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart}/>} />
+                <Route path='/checkout' element={<Checkout />} />
                 <Route path='/checkoutconfirmation' element={<CheckoutConfirmation />} />
-                <Route path='/checkoutpayment' element={<CheckoutPayment />} />
+                <Route path='/purchasesummary' element={<PurchaseSummary />} />
         </Routes>
       </Container>
     </>

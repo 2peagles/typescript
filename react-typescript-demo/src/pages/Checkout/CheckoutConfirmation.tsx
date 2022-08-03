@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { CheckoutContainer, CheckoutHeader, CheckoutBox, CheckoutBoxMessage } from '../../styles/Checkout';
 
@@ -11,8 +12,8 @@ export const CheckoutConfirmation = () => {
     <CheckoutBox>
       <CheckoutBoxMessage >
         <div style={{height:'10vh', width:'30vw', color:'white'}}>
-        <h3>Thank You, Your order is on it's way!</h3>
-       <Button className='mt-3'> Confirm </Button>
+        <h3>Thank You, for your purchase!</h3>
+       <Link to='/'><Button className='mt-3'> Home Page </Button></Link>
       </div>
       </CheckoutBoxMessage>       
     </CheckoutBox>

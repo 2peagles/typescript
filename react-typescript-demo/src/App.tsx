@@ -42,6 +42,8 @@ function App() {
       }
     });
    }, []);
+
+
   const handleAddToCart = (productId, quantity) => {
     commerce.cart.add(productId, quantity).then((item) => {
       setCart(item.cart);
@@ -73,8 +75,9 @@ function App() {
 
   return (
     <>
-    <Navbar />
+    {/* <Navbar /> */}
     <Container fluid className='no-gutters'>
+    <Navbar />
       <Routes>
           <Route path='/' element={<Home products={products} onAddToCart={handleAddToCart} />} />
           <Route path='/store' element={<Store products={products} onAddToCart={handleAddToCart}/>} />
@@ -87,7 +90,7 @@ function App() {
                 onEmptyCart={handleEmptyCart} 
                   />
                 }/>
-                <Route path='/checkout' element={<Checkout />} />
+                <Route path='/checkout' element={<Checkout cart={cart}/>} />
                 <Route path='/checkoutconfirmation' element={<CheckoutConfirmation />} />
                 <Route path='/purchasesummary' element={<PurchaseSummary />} />
         </Routes>

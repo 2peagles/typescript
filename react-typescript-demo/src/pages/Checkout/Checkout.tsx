@@ -6,19 +6,19 @@ import CheckoutForm from './CheckoutForm';
 // import { CartTotal, CartTotalTitle } from '../../styles/cart';
 import { CheckoutBox, CheckoutContainer, CheckoutHeader, CheckoutPageBox } from '../../styles/Checkout';
 
-const Checkout = () => {
+const Checkout = ({cart}) => {
   return (
-    <CheckoutContainer className='d-block  pl-3 pr-3'>
+    <CheckoutContainer>
         <CheckoutHeader style={{color:'#69c0de80'}}>Checkout</CheckoutHeader>
           <CheckoutBox>
           <CheckoutPageBox>
             <Row>
               <Col sm={12}>
-            <CheckoutForm /> 
-            </Col>
-            </Row>
+                <CheckoutForm cart={cart}/> 
+                </Col>
+              </Row>
             </CheckoutPageBox>
-          </CheckoutBox>
+       </CheckoutBox>
     </CheckoutContainer>
   )
 }

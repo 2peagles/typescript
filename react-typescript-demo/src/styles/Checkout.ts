@@ -4,16 +4,12 @@ import styled from 'styled-components';
 // const textprimary ='#69c0de80';
 // const textaccent ='#DE8769';
 
-export const CheckoutContainer= styled.div`
+export const CheckoutContainer = styled.div`
     top:0;
-    left:0; 
+    left:0;
+    right:0;
     z-index:1999;
-    min-height:100vh;
-    min-width:100vw;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position: fixed;
+    position:absolute;
     background-color:white;
 `
 export const CheckoutHeader = styled.h1`
@@ -26,8 +22,8 @@ export const CheckoutHeader = styled.h1`
     text-transform:uppercase;
 `
 export const CheckoutBox = styled.div`
-    min-height:100vh;
-    min-width:100vw;
+    min-height:90vh;
+    // min-width:100vw;
     display:flex;
     align-items:center;
     justify-content:center;

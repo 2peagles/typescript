@@ -9,10 +9,10 @@ export const Home = ({products, onAddToCart}) => {
       <Row style={{ minHeight: '100vh', width: '100vw', backgroundColor: 'rgba(105, 192, 222,0.5)' }}>
         <MyCol xs={12} md={6}>
           <div >
-            <p>Couples, Small, Medium, Large & Families</p>
-                <h1> Home Essentials</h1>
-                  <AccentButton style={{marginRight:'10px'}}>Shop Tops</AccentButton>
-                    <MyButton>Shop Shoes</MyButton>
+            <p>Look fresh to death this summer</p>
+                <h1> Clothing Essentials</h1>
+                  <AccentButton style={{marginRight:'10px'}}>Shop Mens </AccentButton>
+                    <MyButton>Shop Womens</MyButton>
                    </div>
                 </MyCol>
               <MyCol xs={12} md={6}>
@@ -51,13 +51,13 @@ export const Home = ({products, onAddToCart}) => {
           <MyCol>
             <Card style={{ borderRadius: '2rem', borderColor: '#DE8769', backgroundColor: 'transparent', marginBottom:'10px'}} className='d-flex align-items-center justify-content-center '  >
               <Card.Img src='/imgs/single.png' alt='sports' style={{ objectFit: 'cover' }} />
-                <MyButton style={{width:'30%',marginBottom:'20px'}}> Shop Singles </MyButton>
+                <MyButton style={{width:'30%',marginBottom:'20px'}}> Shop Summer</MyButton>
                 </Card>
               </MyCol>
           <MyCol>
             <Card style={{ borderRadius: '2rem', marginBottom: '10px', borderColor: '#DE8769', }} className='d-flex align-items-center justify-content-center ' >
               <Card.Img variant='top' src='/imgs/family.png' alt='sports' style={{ objectFit:'cover', height:'408px', width:'610px'}} />
-                  <AccentButton style={{marginBottom: '20px',width:'30%'}}>Shop Families</AccentButton>
+                  <AccentButton style={{marginBottom: '20px',width:'30%'}}>Shop Summer</AccentButton>
             </Card>
           </MyCol>
         </Row>

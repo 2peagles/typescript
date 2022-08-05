@@ -11,8 +11,8 @@ export const Home = ({products, onAddToCart}) => {
           <div >
             <p>Couples, Small, Medium, Large & Families</p>
                 <h1> Home Essentials</h1>
-                  <AccentButton style={{marginRight:'10px'}}>Shop Bundles </AccentButton>
-                    <MyButton>Shop Individuals</MyButton>
+                  <AccentButton style={{marginRight:'10px'}}>Shop Tops</AccentButton>
+                    <MyButton>Shop Shoes</MyButton>
                    </div>
                 </MyCol>
               <MyCol xs={12} md={6}>

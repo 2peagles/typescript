@@ -1,28 +1,60 @@
 import React, {useState, useEffect} from 'react';
 import {Container, Row, Col, Form} from 'react-bootstrap';
-// import { Link } from "react-router-dom";
-// import { CartCheckout } from '../../styles/cart';
+import { Link } from "react-router-dom";
+import { CartCheckout } from '../../styles/cart';
 import { useForm, FormProvider } from 'react-hook-form';
 import commerce from '../../lib/commerce';
-// import { Elements, CardElement, ElementsConsumer} from '@stripe/react-stripe-js';
-// import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, ElementsConsumer} from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 type CheckoutProp = {
-  id:string | number ;
-  // live: {} | any;
+  id: string | number 
+  live: {} | any;
 }
-const CheckoutForm = ({cart}) => {
-
-  // const stripePromise = loadStripe('...');
-
+export const stripePromise = loadStripe('process.env.React_APP_STRIPE_PUBLIC_KEY');
+const CheckoutForm = ({ cart, shippingData, onCaptureCheckout }) => {
   const [shippingCountries, setShippingCountries]=useState<{} | []>({});
   const [shippingCountry, setShippingCountry]=useState('');
   const [shippingSubdivisions, setShippingSubdivisions]=useState<{} | []>({});
   const [shippingSubdivision, setShippingSubdivision]=useState('');
   const [shippingOptions, setShippingOptions]=useState<any[]>([]);
   const [shippingOption, setShippingOption]=useState('');
-  const [checkoutToken, setCheckoutToken]=useState<CheckoutProp>(null!);
+  const [checkoutToken, setCheckoutToken]=useState<CheckoutProp>({});
   const methods = useForm();
+  const handleSumbit = async (event, elements, stripe)=>{
+    event.preventDefault();
+
+    if (!stripe || !elements)return;
+
+    const cardElement = elements.getElement(CardElement);
+    const {error, paymentMethod} = await stripe.createPaymentMethod({type: 'card', card: cardElement});
+
+    if(error) {
+      console.log(error);
+    } else {
+      const orderData = {
+        line_items:checkoutToken.live.line_items,
+        customer:{firstname:shippingData.firstName, lastname:shippingData.lastName, email:shippingData.email},
+        shipping:{
+          name:'Primary', 
+          street:shippingData.address1, 
+          town_city:shippingData.city, 
+          county_state:shippingData.shippingSubdivision,
+          postal_zip_code:shippingData.zip,
+          country:shippingData.shippingCountry,
+        },
+        fulfillment:{shipping_method:shippingData.shippingOption},
+        payment:{
+          gateway:'stripe',
+          stripe:{
+            payment_method_id:paymentMethod.id
+          },
+        },
+      };
+      onCaptureCheckout(checkoutToken.id, orderData);
+    }
+  };
+
 
   const countries = Object.entries(shippingCountries).map(([code, name])=>({id: code, label:name }));
   const subdivisions = Object.entries(shippingSubdivisions).map(([code, name])=>({id: code, label:name }));
@@ -40,8 +72,8 @@ const CheckoutForm = ({cart}) => {
       setShippingSubdivisions(subdivisions);
       setShippingSubdivision(Object.keys(subdivisions)[0]);
   }
-  const fetchShippingOptions = async (checkoutTokenId, country, stateProvince = null!)=>{
-    const options = await commerce.checkout.getShippingOptions(checkoutTokenId, {country, region:stateProvince});
+  const fetchShippingOptions = async (checkoutTokenId, country, region = null) => {
+    const options = await commerce.checkout.getShippingOptions(checkoutTokenId, {country, region});
     setShippingOptions(options);
     setShippingOption(options[0].id);
   }
@@ -68,7 +100,7 @@ const CheckoutForm = ({cart}) => {
 
   useEffect(()=>{
       if (shippingSubdivision)fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
-  },[shippingSubdivision])
+  },[shippingSubdivision]);
 
   return (
     <>
@@ -90,7 +122,7 @@ const CheckoutForm = ({cart}) => {
               <Form.Control type="address" placeholder="Street Address" />
             </Col>
             <Col  sm={12} md={6}>
-              <Form.Label  >City</Form.Label>
+              <Form.Label >City</Form.Label>
               <Form.Control type="city" placeholder="City" />
               <Form.Label  className="mt-3">Shipping Country</Form.Label>
                  <Form.Select value={shippingCountry} onChange={(e)=> setShippingCountry(e.target.value)} >
@@ -165,21 +197,21 @@ const CheckoutForm = ({cart}) => {
                   <h3 className="mt-3"> Payment </h3>
                 </Col>
               </Row>
-                {/* <Elements stripe={stripePromise}>
+                <Elements stripe={stripePromise}>
                   <ElementsConsumer>
                     {({elements,stripe})=>(
-                      <form>
+                      <form onSubmit={(e)=> handleSumbit(e, elements, stripe)}>
                         <CardElement/>
                         <br></br>
-                      <div>
-                            <Link to ='/store'> <CartCheckout style={{ width: '80%', borderRadius: '5px' }}> Back To Store</CartCheckout></Link>
+                      <div >
+                            <Link to ='/store'> <CartCheckout style={{ width: '10%', borderRadius: '5px' }}> Back To Store</CartCheckout></Link>
                                   <Link to='/purchasesummary'> 
                                     <CartCheckout 
-                                            style={{ width: '70%', borderRadius: '5px' }} 
+                                            style={{ width: '10%', borderRadius: '5px' }} 
                                             type="submit"
                                              disabled={!stripe}
                                           > 
-                                          Next 
+                                          Pay 
                                           {checkoutToken.live.subtotal.formatted_with_symbol}
                                     </CartCheckout>
                            </Link>
@@ -187,7 +219,7 @@ const CheckoutForm = ({cart}) => {
                     </form>
                     )}
                   </ElementsConsumer>
-                </Elements>       */}
+                </Elements>      
             {/* <Col sm={12} md={6}>
               <Form.Label className="mt-3"> Credit Card Number </Form.Label>
               <Form.Control type="card number" placeholder="Credit Card Number" />

@@ -6,7 +6,7 @@ import CheckoutForm from './CheckoutForm';
 // import { CartTotal, CartTotalTitle } from '../../styles/cart';
 import { CheckoutBox, CheckoutContainer, CheckoutHeader, CheckoutPageBox } from '../../styles/Checkout';
 
-const Checkout = ({cart}) => {
+const Checkout = ({cart, onCaptureCheckout, errorMessage}) => {
   return (
     <CheckoutContainer>
         <CheckoutHeader style={{color:'#69c0de80'}}>Checkout</CheckoutHeader>
@@ -14,7 +14,7 @@ const Checkout = ({cart}) => {
           <CheckoutPageBox>
             <Row>
               <Col sm={12}>
-                <CheckoutForm cart={cart}/> 
+                <CheckoutForm cart={cart} onCaptureCheckout={onCaptureCheckout} error={errorMessage}/> 
                 </Col>
               </Row>
             </CheckoutPageBox>

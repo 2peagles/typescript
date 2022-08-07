@@ -4,10 +4,31 @@ import styled from 'styled-components';
 // const textprimary ='#69c0de80';
 // const textaccent ='#DE8769';
 
+const size = {
+    mobileS: '320px',
+    mobileM: '375px',
+    mobileL: '425px',
+    tablet: '768px',
+    laptop: '1024px',
+    laptopL: '1440px',
+    desktop: '2560px'
+}
+
+export const device = {
+    mobileS: `(min-width: ${size.mobileS})`,
+    mobileM: `(min-width: ${size.mobileM})`,
+    mobileL: `(min-width: ${size.mobileL})`,
+    tablet: `(min-width: ${size.tablet})`,
+    laptop: `(min-width: ${size.laptop})`,
+    laptopL: `(min-width: ${size.laptopL})`,
+    desktop: `(min-width: ${size.desktop})`,
+    desktopL: `(min-width: ${size.desktop})`
+};
 export const CheckoutContainer = styled.div`
     top:0;
     left:0;
     right:0;
+    width:100%;
     z-index:1999;
     position:absolute;
     background-color:white;
@@ -37,6 +58,9 @@ justify-content:center;
 border-radius:2rem;
 // background-color:white;
 box-shadow:5px 10px 10px 10px grey;
+@media (max-width400px) and (max-height: 900px){
+    box-shadow:none;
+}
 `
 export const CheckoutItems=styled.div`
     width:350px;

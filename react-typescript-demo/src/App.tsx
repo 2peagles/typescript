@@ -10,7 +10,7 @@ import WebFont from 'webfontloader';
 import CartNav from './components/Cart/CartNav';
 import Checkout from './pages/Checkout/Checkout';
 import { CheckoutConfirmation } from './pages/Checkout/CheckoutConfirmation';
-import { PurchaseSummary } from './pages/Checkout/PurchaseSummary';
+// import { PurchaseSummary } from './pages/Checkout/PurchaseSummary';
 
 function App() {
   const [products, setProducts] = useState< any | []>([ ]);
@@ -84,15 +84,15 @@ function App() {
       const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder)
       setOrder(incomingOrder);
       refreshCart();
-    } catch (error){
-        setErrorMessage(error.data.error.message);
+    } catch (error) {
+        setErrorMessage('error.data.error.message');
     }
   }
   return (
     <>
-    {/* <Navbar /> */}
-    <Container fluid className='no-gutters'>
     <Navbar />
+    <Container fluid className='no-gutters'>
+    {/* <Navbar /> */}
       <Routes>
           <Route path='/' element={<Home products={products} onAddToCart={handleAddToCart} />} />
           <Route path='/store' element={<Store products={products} onAddToCart={handleAddToCart}/>} />
@@ -113,8 +113,8 @@ function App() {
                       error={errorMessage}
                       />} 
                       />
-                <Route path='/checkoutconfirmation' element={<CheckoutConfirmation />} />
-                <Route path='/purchasesummary' element={<PurchaseSummary />} />
+                <Route path='/checkoutconfirmation' element={<CheckoutConfirmation order={order} error={errorMessage}/>} />
+                {/* <Route path='/purchasesummary' element={<PurchaseSummary  />} /> */}
         </Routes>
       </Container>
     </>

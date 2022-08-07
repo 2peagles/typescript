@@ -6,21 +6,28 @@ import { useForm, FormProvider } from 'react-hook-form';
 import commerce from '../../lib/commerce';
 import { Elements, CardElement, ElementsConsumer} from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { PurchaseSummary } from './PurchaseSummary';
 
-type CheckoutProp = {
-  id: string | number 
-  live: {} | any;
-}
-export const stripePromise = loadStripe('process.env.React_APP_STRIPE_PUBLIC_KEY');
-const CheckoutForm = ({ cart, shippingData, onCaptureCheckout }) => {
+// type CheckoutTokenProp = {
+//   id:string | number;
+//   subtotal: any | number | undefined;
+//   live:any| {} ;
+// }
+ const stripePromise = loadStripe('process.env.React_APP_STRIPE_PUBLIC_KEY');
+const CheckoutForm = ({ cart,  onCaptureCheckout, shippingData, test }) => {
   const [shippingCountries, setShippingCountries]=useState<{} | []>({});
   const [shippingCountry, setShippingCountry]=useState('');
   const [shippingSubdivisions, setShippingSubdivisions]=useState<{} | []>({});
-  const [shippingSubdivision, setShippingSubdivision]=useState('');
+  const [shippingSubdivision, setShippingSubdivision]=useState<any | string | undefined>('');
   const [shippingOptions, setShippingOptions]=useState<any[]>([]);
   const [shippingOption, setShippingOption]=useState('');
-  const [checkoutToken, setCheckoutToken]=useState<CheckoutProp>({});
+  const [checkoutToken, setCheckoutToken]=useState<any | {}>({});
+
+  const [showOrderSummary, setShowOrderSummary]=useState(false);
+  // const[stripePromise, setStripePromise] = useState(() => loadStripe(PUBLISHABLE_KEY))
   const methods = useForm();
+
+  // const stripePromise = loadStripe('process.env.React_APP_STRIPE_PUBLIC_KEY');
   const handleSumbit = async (event, elements, stripe)=>{
     event.preventDefault();
 
@@ -62,7 +69,7 @@ const CheckoutForm = ({ cart, shippingData, onCaptureCheckout }) => {
 
    const fetchShippingCountries = async (checkoutTokenId) =>{
     const { countries } = await commerce.services.localeListShippingCountries(checkoutTokenId);
-    console.log(countries)
+    // console.log(countries)
       setShippingCountries(countries);
       setShippingCountry(Object.keys(countries)[0]);
   }
@@ -72,27 +79,30 @@ const CheckoutForm = ({ cart, shippingData, onCaptureCheckout }) => {
       setShippingSubdivisions(subdivisions);
       setShippingSubdivision(Object.keys(subdivisions)[0]);
   }
-  const fetchShippingOptions = async (checkoutTokenId, country, region = null) => {
+  const fetchShippingOptions = async (checkoutTokenId, country, region = null!) => {
     const options = await commerce.checkout.getShippingOptions(checkoutTokenId, {country, region});
     setShippingOptions(options);
     setShippingOption(options[0].id);
   }
 
   useEffect(()=> {
-    const generateToken = async ()=> {
-      try{
+    if(cart.id){
+    const generateToken = async () => {
+      try {
           const token = await commerce.checkout.generateToken(cart.id, {type:'cart'});
           setCheckoutToken(token);
       } catch (error){
         console.log('There was an error in generating a token', error);
       }
+    };
+      generateToken();
     }
-    generateToken();
   }, [cart]);
   
   useEffect(()=>{
     fetchShippingCountries(checkoutToken.id)
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ ]);
 
   useEffect(()=>{
     if (shippingCountry) fetchSubdivisions(shippingCountry)
@@ -100,15 +110,16 @@ const CheckoutForm = ({ cart, shippingData, onCaptureCheckout }) => {
 
   useEffect(()=>{
       if (shippingSubdivision)fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[shippingSubdivision]);
 
   return (
     <>
-    <FormProvider {...methods}>
-      <Form onSubmit={methods.handleSubmit(data => console.log(data))}>
-        <Container >
+    <Container>
+      <FormProvider {...methods}>
+        <Form onSubmit={methods.handleSubmit((data) => test({ ...data, shippingCountry, shippingSubdivision, shippingOption }))}>
           <Row>
-            <Col sm={12} md={6}>
+            <Col>
             <Row sm={12}>
                 <h3 className="mb-3"> Shipping Details</h3>
             <Col sm={12} md={6}>
@@ -137,7 +148,7 @@ const CheckoutForm = ({ cart, shippingData, onCaptureCheckout }) => {
                      ))}
                      </Form.Select>
               <Form.Label  className="mt-3">Shipping Options</Form.Label>
-                  <Form.Select value={shippingOption}  onChange={(e)=> setShippingOption(e.target.value)}            >
+                  <Form.Select value={shippingOption}  onChange={(e)=> setShippingOption(e.target.value)}   className='mb-5' >
                      {/* {options.map((option)=>(
                       <option key={option.id} value={option.id}>{option.label}</option>
                      ))} */}
@@ -159,7 +170,7 @@ const CheckoutForm = ({ cart, shippingData, onCaptureCheckout }) => {
               <Form.Control type="lastName" placeholder="Last Name" />
               <Form.Label className="mt-3" >Email address</Form.Label>
               <Form.Control type="email" placeholder="Enter email" />
-              <Form.Label>Street Address</Form.Label>
+                    <Form.Label className="mt-3" >Street Address</Form.Label>
               <Form.Control type="address" placeholder="Street Address" />
             </Col>
             <Col sm={12} md={6}>
@@ -178,19 +189,19 @@ const CheckoutForm = ({ cart, shippingData, onCaptureCheckout }) => {
                      ))}
                      </Form.Select>
               <Form.Label  className="mt-3">Shipping Options</Form.Label>
-                  <Form.Select value={shippingOption}  onChange={(e)=> setShippingOption(e.target.value)}            >
-                     {/* {options.map((option)=>(
-                      <option key={option.id} value={option.id}>{option.label}</option>
-                     ))} */}
+                  <Form.Select value={shippingOption}  onChange={(e)=> setShippingOption(e.target.value)} >
                      {
                       shippingOptions.map((sO)=> ({id:sO.id, label: `${sO.description} - (${sO.price.formatted_with_symbol})`})).map((item)=>(
                       <option key={item.id} value={item.id}>{item.label}</option>
                       ))}
-                     </Form.Select>
+                     </Form.Select>      
             </Col>
             </Row>
             </Col>
           </Row>
+        </Form>
+      </FormProvider>
+
           <Row>
               <Row>
                 <Col>
@@ -204,54 +215,24 @@ const CheckoutForm = ({ cart, shippingData, onCaptureCheckout }) => {
                         <CardElement/>
                         <br></br>
                       <div >
-                            <Link to ='/store'> <CartCheckout style={{ width: '10%', borderRadius: '5px' }}> Back To Store</CartCheckout></Link>
-                                  <Link to='/purchasesummary'> 
-                                    <CartCheckout 
-                                            style={{ width: '10%', borderRadius: '5px' }} 
-                                            type="submit"
-                                             disabled={!stripe}
-                                          > 
-                                          Pay 
-                                          {checkoutToken.live.subtotal.formatted_with_symbol}
-                                    </CartCheckout>
-                           </Link>
+                            <Link to ='/store'> <CartCheckout> Back To Store</CartCheckout></Link>
+                                    <CartCheckout type="submit" disabled={!stripe} onClick={()=> setShowOrderSummary(!showOrderSummary)}> 
+                                         pay
+                                          {/* {checkoutToken.live.subtotal.formatted_with_symbol}  */}
+                                </CartCheckout>
                         </div>
                     </form>
                     )}
                   </ElementsConsumer>
                 </Elements>      
-            {/* <Col sm={12} md={6}>
-              <Form.Label className="mt-3"> Credit Card Number </Form.Label>
-              <Form.Control type="card number" placeholder="Credit Card Number" />
-              <Form.Label>Expiry Month</Form.Label>
-              <Form.Control type="card number" placeholder="Expiry Month" />
-            </Col>
-            <Col sm={12} md={6}>
-              <Form.Label className="mt-3">Expir Year</Form.Label>
-              <Form.Control type="" placeholder="Expiry Year" />
-              <Form.Label>CCV</Form.Label>
-              <Form.Control type="ccv" placeholder="CCV" />
-            </Col> */}
           </Row>
-          {/* <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-             <Link to ='/store'> <CartCheckout style={{ width: '80%', borderRadius: '5px' }}> Back To Store</CartCheckout></Link>
-             <Link to='/purchasesummary'> 
-                <CartCheckout 
-                    style={{ width: '70%', borderRadius: '5px' }} 
-                    type="submit"
-                    disabled={!stripe}
-                    > Next {checkoutToken.live.subtotal.formatted_with_symbol}
-                    </CartCheckout>
-                </Link>
-          </div> */}
-        </Container>
-      </Form>
-    </FormProvider>
+    </Container>
 
-
+    {showOrderSummary &&
+      <PurchaseSummary checkoutToken={checkoutToken} />
+    }
     </>
   )
 }
 
 export default CheckoutForm;
-

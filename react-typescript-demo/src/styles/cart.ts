@@ -47,6 +47,8 @@ export const CartCheckout=styled.button`
         color: black;
         font-weight: bold;
         font-size: 0.75rem;
+        width:fit-content;
+        border-radius:5px;
 `
 export const CartNone =styled.p`
         padding: 1.25rem;

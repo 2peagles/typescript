@@ -63,8 +63,11 @@ box-shadow:5px 10px 10px 10px grey;
 }
 `
 export const CheckoutItems=styled.div`
-    width:350px;
-    display:block;
+    display:'flex';
+    align-items:'center';
+    justify-content:'center'
+    min-width:350px;
+    // display:block;
     // padding:0px 50px 0px;
 `
 export const CheckoutPageBox = styled.div`

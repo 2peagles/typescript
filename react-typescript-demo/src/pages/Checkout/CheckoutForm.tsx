@@ -4,63 +4,62 @@ import { Link } from "react-router-dom";
 import { CartCheckout } from '../../styles/cart';
 import { useForm, FormProvider } from 'react-hook-form';
 import commerce from '../../lib/commerce';
-import { Elements, CardElement, ElementsConsumer} from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+// import { Elements, CardElement, ElementsConsumer} from '@stripe/react-stripe-js';
+// import { loadStripe } from '@stripe/stripe-js';
 import { PurchaseSummary } from './PurchaseSummary';
 
-// type CheckoutTokenProp = {
-//   id:string | number;
-//   subtotal: any | number | undefined;
-//   live:any| {} ;
-// }
- const stripePromise = loadStripe('process.env.React_APP_STRIPE_PUBLIC_KEY');
-const CheckoutForm = ({ cart,  onCaptureCheckout, shippingData, test }) => {
+//  const stripePromise = loadStripe('process.env.React_APP_STRIPE_PUBLIC_KEY');
+
+type CheckoutTokenProp = {
+  id: string | number;
+  live: any | null;
+  subtotal: number;
+}
+const CheckoutForm = ({ cart,  onCaptureCheckout, shippingData, test}) => {
   const [shippingCountries, setShippingCountries]=useState<{} | []>({});
   const [shippingCountry, setShippingCountry]=useState('');
   const [shippingSubdivisions, setShippingSubdivisions]=useState<{} | []>({});
   const [shippingSubdivision, setShippingSubdivision]=useState<any | string | undefined>('');
   const [shippingOptions, setShippingOptions]=useState<any[]>([]);
   const [shippingOption, setShippingOption]=useState('');
-  const [checkoutToken, setCheckoutToken]=useState<any | {}>({});
+  const [checkoutToken, setCheckoutToken]=useState<CheckoutTokenProp | any | {}>({});
 
   const [showOrderSummary, setShowOrderSummary]=useState(false);
-  // const[stripePromise, setStripePromise] = useState(() => loadStripe(PUBLISHABLE_KEY))
   const methods = useForm();
 
-  // const stripePromise = loadStripe('process.env.React_APP_STRIPE_PUBLIC_KEY');
-  const handleSumbit = async (event, elements, stripe)=>{
-    event.preventDefault();
+  // const handleSumbit = async (event, elements, stripe)=>{
+  //   event.preventDefault();
 
-    if (!stripe || !elements)return;
+  //   if (!stripe || !elements)return;
 
-    const cardElement = elements.getElement(CardElement);
-    const {error, paymentMethod} = await stripe.createPaymentMethod({type: 'card', card: cardElement});
+  //   const cardElement = elements.getElement(CardElement);
+  //   const {error, paymentMethod} = await stripe.createPaymentMethod({type: 'card', card: cardElement});
 
-    if(error) {
-      console.log(error);
-    } else {
-      const orderData = {
-        line_items:checkoutToken.live.line_items,
-        customer:{firstname:shippingData.firstName, lastname:shippingData.lastName, email:shippingData.email},
-        shipping:{
-          name:'Primary', 
-          street:shippingData.address1, 
-          town_city:shippingData.city, 
-          county_state:shippingData.shippingSubdivision,
-          postal_zip_code:shippingData.zip,
-          country:shippingData.shippingCountry,
-        },
-        fulfillment:{shipping_method:shippingData.shippingOption},
-        payment:{
-          gateway:'stripe',
-          stripe:{
-            payment_method_id:paymentMethod.id
-          },
-        },
-      };
-      onCaptureCheckout(checkoutToken.id, orderData);
-    }
-  };
+  //   if(error) {
+  //     console.log(error);
+  //   } else {
+  //     const orderData = {
+  //       line_items:checkoutToken.live.line_items,
+  //       customer:{firstname:shippingData.firstName, lastname:shippingData.lastName, email:shippingData.email},
+  //       shipping:{
+  //         name:'Primary', 
+  //         street:shippingData.address1, 
+  //         town_city:shippingData.city, 
+  //         county_state:shippingData.shippingSubdivision,
+  //         postal_zip_code:shippingData.zip,
+  //         country:shippingData.shippingCountry,
+  //       },
+  //       fulfillment:{shipping_method:shippingData.shippingOption},
+  //       payment:{
+  //         gateway:'stripe',
+  //         stripe:{
+  //           payment_method_id:paymentMethod.id
+  //         },
+  //       },
+  //     };
+  //     onCaptureCheckout(checkoutToken.id, orderData);
+  //   }
+  // };
 
 
   const countries = Object.entries(shippingCountries).map(([code, name])=>({id: code, label:name }));
@@ -101,8 +100,8 @@ const CheckoutForm = ({ cart,  onCaptureCheckout, shippingData, test }) => {
   
   useEffect(()=>{
     fetchShippingCountries(checkoutToken.id)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ ]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(()=>{
     if (shippingCountry) fetchSubdivisions(shippingCountry)
@@ -117,7 +116,7 @@ const CheckoutForm = ({ cart,  onCaptureCheckout, shippingData, test }) => {
     <>
     <Container>
       <FormProvider {...methods}>
-        <Form onSubmit={methods.handleSubmit((data) => test({ ...data, shippingCountry, shippingSubdivision, shippingOption }))}>
+          <Form onSubmit={methods.handleSubmit((data) => test({ ...data, shippingCountry, shippingSubdivision, shippingOption }))}>
           <Row>
             <Col>
             <Row sm={12}>
@@ -198,38 +197,17 @@ const CheckoutForm = ({ cart,  onCaptureCheckout, shippingData, test }) => {
             </Col>
             </Row>
             </Col>
-          </Row>
-        </Form>
-      </FormProvider>
-
-          <Row>
-              <Row>
-                <Col>
-                  <h3 className="mt-3"> Payment </h3>
-                </Col>
-              </Row>
-                <Elements stripe={stripePromise}>
-                  <ElementsConsumer>
-                    {({elements,stripe})=>(
-                      <form onSubmit={(e)=> handleSumbit(e, elements, stripe)}>
-                        <CardElement/>
-                        <br></br>
-                      <div >
-                            <Link to ='/store'> <CartCheckout> Back To Store</CartCheckout></Link>
-                                    <CartCheckout type="submit" disabled={!stripe} onClick={()=> setShowOrderSummary(!showOrderSummary)}> 
-                                         pay
-                                          {/* {checkoutToken.live.subtotal.formatted_with_symbol}  */}
-                                </CartCheckout>
-                        </div>
-                    </form>
-                    )}
-                  </ElementsConsumer>
-                </Elements>      
-          </Row>
+              <div  className='mt-3'>
+                <Link to='/store'> <CartCheckout> Back To Store </CartCheckout></Link>
+                <CartCheckout type="submit" onClick={() => setShowOrderSummary(!showOrderSummary)}> continue  </CartCheckout>
+              </div>
+            </Row>
+          </Form>
+        </FormProvider>
     </Container>
 
     {showOrderSummary &&
-      <PurchaseSummary checkoutToken={checkoutToken} />
+      <PurchaseSummary checkoutToken={checkoutToken}  onCaptureCheckout={onCaptureCheckout} shippingData={shippingData}/>
     }
     </>
   )

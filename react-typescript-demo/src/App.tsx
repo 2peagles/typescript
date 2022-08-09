@@ -11,7 +11,6 @@ import CartNav from './components/Cart/CartNav';
 import Checkout from './pages/Checkout/Checkout';
 import { CheckoutConfirmation } from './pages/Checkout/CheckoutConfirmation';
 // import { PurchaseSummary } from './pages/Checkout/PurchaseSummary';
-
 function App() {
   const [products, setProducts] = useState< any | []>([ ]);
   const [cart, setCart] = useState({});

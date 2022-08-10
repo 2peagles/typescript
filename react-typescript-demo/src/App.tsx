@@ -90,7 +90,7 @@ function App() {
   return (
     <>
     <Navbar />
-    <Container fluid className='no-gutters'>
+    <Container fluid className='no-gutters' style={{padding:'0px 0px'}}>
     {/* <Navbar /> */}
       <Routes>
           <Route path='/' element={<Home products={products} onAddToCart={handleAddToCart} />} />

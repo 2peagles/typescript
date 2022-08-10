@@ -1,31 +1,17 @@
 import styled from 'styled-components';
-import { Button, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
-const accentcolor='#DE8769'
-export const Container =styled.div`
-
+// const accentcolor='#DE8769'
+export const HeroContainer=styled(Container)`
+    height:100vh;
+    width:100vw;
+    padding:0px 0px;
+    margin:0px;
+    background-size:cover;
+    background-position:center;
+    background-image: url('/imgs/hero.jpg') ;
 `
-export const MyCol=styled(Col)`
-    display:flex;
-    align-items:center;
-    justify-content:center;
-`
-export const MyButton = styled(Button)`
-    background-color: transparent;
-    border-color:${accentcolor};
-    color:black;
-    &:hover{
-         background-color: transparent;
-         border-color:${accentcolor};
-         color:black;
-    }
-`
-export const AccentButton = styled(Button)`
-    background-color:${accentcolor};
-    border-color:${accentcolor};
-    color:white;
-    &:hover {
-        background-color:${accentcolor};
-        border-color:${accentcolor};
-    }
+export const OverLay=styled.div`
+  opacity: 0.9;
+  background-color:black;
 `

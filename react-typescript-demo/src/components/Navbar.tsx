@@ -7,6 +7,8 @@ import commerce from '../lib/commerce';
 
 export const Navbar = () => {
   const [cart, setCart] = useState({});
+  // const[activeNav, setActiveNav]=useState(false);
+  // const handleClick=setActiveNav (!activeNav)
   const fetchCart = () => {
     commerce.cart.retrieve().then((cart) => {
       setCart(cart);
@@ -17,13 +19,7 @@ export const Navbar = () => {
   useEffect(() => {
     fetchCart();
   }, []);
-  // const handleAddToCart = (productId, quantity) => {
-  //   commerce.cart.add(productId, quantity).then((item) => {
-  //     setCart(item.cart);
-  //   }).catch((error) => {
-  //     console.error('There was an error adding the item to the cart', error);
-  //   });
-  // }
+
   const handleUpdateCartQty = (lineItemId, quantity) => {
     commerce.cart.update(lineItemId, { quantity }).then((resp) => {
       setCart(resp.cart);
@@ -46,9 +42,9 @@ export const Navbar = () => {
     });
   }
   return (
-    <NavbarBs className='bg-white shadow-sm'>
+    <NavbarBs className='bg-transparent fs-3 shadow-sm'>
         <Container>
-            <Nav className='me-auto '>
+            <Nav className='me-auto' >
                 <Nav.Link to='/' as={NavLink}>Home</Nav.Link>
                   <Nav.Link to='/store' as={NavLink}>Store</Nav.Link>
                   <Nav.Link to='/about' as={NavLink}>About</Nav.Link>

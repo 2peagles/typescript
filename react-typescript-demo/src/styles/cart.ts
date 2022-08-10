@@ -120,8 +120,7 @@ export const CartNavContainer=styled.div`
 `
 export const CartNavOpenButton =styled.button`
     border:none;
-    // color &hover:${textaccent};
-    font-size:1.5rem;
+    font-size:2rem;
     background-color:transparent;
     &:hover{
         color:${textaccent}
